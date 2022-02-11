@@ -78,19 +78,25 @@
         <main class="py-4">
             <!-- @yield('content') -->
             <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <input class="form-control form-control-lg" type="date" placeholder=".form-control-lg">
+                <form action="{{ route('search') }}" method="post">
+                    @csrf
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <input class="form-control form-control-lg" name="date" type="date" placeholder=".form-control-lg">
+                        </div>
                     </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <input class="form-control form-control-lg" type="time" placeholder=".form-control-lg">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <input class="form-control form-control-lg" name="time" type="time" placeholder=".form-control-lg">
+                        </div>
                     </div>
-                </div>
-                <div class="row justify-content-center">
-                    <button class="btn btn-primary">Search</button>
-                </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-1">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
+                
             </div>
         </main>
     </div>

@@ -18,7 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', [HomeController::class, 'index']);
+// Route::get('/search', [HomeController::class, 'index']);
+Route::post('/search', [HomeController::class, 'search'])->name('search');
 
 
 
