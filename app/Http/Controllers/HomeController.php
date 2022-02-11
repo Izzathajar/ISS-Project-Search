@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Log; 
 
 class HomeController extends Controller
 {
     public function index ()
     {
-        return 'apa2';
+        return view('welcome');
     }
 
     public function search(Request $request)
@@ -37,14 +37,15 @@ class HomeController extends Controller
         $time_nix = implode(',', $time_nix);
         
         $data = Http::get('https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps='.$time_nix.'&units=miles');
-        $response = $data->json();
+        $responses = $data->object();
+        //dd($responses[0]['name']);
+        // foreach($response as $iss) {
+        //     Log::error($iss['latitude']);
+        //     Log::error($iss['longitude']);
 
-        foreach($response as $iss) {
-            Log::error($iss['latitude']);
-            Log::error($iss['longitude']);
-
-        }
-
-        return $response;
-    }
+        // }
+        
+        return view('result',compact('responses'));
+        //return redirect()->route('home', compact('response'));
+    }   
 }

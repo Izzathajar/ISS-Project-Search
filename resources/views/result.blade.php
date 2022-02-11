@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -95,8 +96,18 @@
                             <button type="submit" class="btn btn-primary">Search</button>
                         </div>
                     </div>
-                    
+                    @forelse($responses as $response)
+                    <p>{{$response->name ?? ''}}</p>
+                    <p>{{$response->latitude ?? ''}}</p>
+                    <p>{{$response->longitude ?? ''}}</p>
+                    <p>{{$response->timestamp ?? ''}}</p>
+                    @empty
+                    <p>no data</p>
+                    @endforelse
                 </form>
+            </div>
+            <div class="container">
+                @include('map')
             </div>
         </main>
     </div>
