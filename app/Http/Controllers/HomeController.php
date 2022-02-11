@@ -33,19 +33,25 @@ class HomeController extends Controller
             $hour_before += 600;
             array_push($time_nix, $hour_before);
         }
-
-        $time_nix = implode(',', $time_nix);
         
-        $data = Http::get('https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps='.$time_nix.'&units=miles');
+        $time_unix = implode(',', $time_nix);
+        
+        $data = Http::get('https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps='.$time_unix.'&units=miles');
         $responses = $data->object();
-        //dd($responses[0]['name']);
-        // foreach($response as $iss) {
-        //     Log::error($iss['latitude']);
-        //     Log::error($iss['longitude']);
+        //dd($responses);
+        $all_location = [];
 
-        // }
+        $coordinate = [];
+
+        foreach($responses as $response){
+            $longitude = $response->longitude;
+            $latitude = $response->latitude;
+            $data2 = Http::get('https://api.wheretheiss.at/v1/coordinates/'.$latitude.','.$longitude);
+            array_push($coordinate, $data2->object());    
+        }
+         
+        return view('result',compact('responses','time_nix'));
         
-        return view('result',compact('responses'));
-        //return redirect()->route('home', compact('response'));
+
     }   
 }

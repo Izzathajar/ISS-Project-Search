@@ -78,7 +78,7 @@
 
         <main class="py-4">
             <!-- @yield('content') -->
-            <div class="container">
+            <div class="container mb-4">
                 <form action="{{ route('search') }}" method="post">
                     @csrf
                     <div class="row justify-content-center">
@@ -91,23 +91,44 @@
                             <input class="form-control form-control-lg" name="time" type="time" placeholder=".form-control-lg">
                         </div>
                     </div>
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center mt-4">
                         <div class="col-md-1">
                             <button type="submit" class="btn btn-primary">Search</button>
                         </div>
                     </div>
-                    @forelse($responses as $response)
-                    <p>{{$response->name ?? ''}}</p>
-                    <p>{{$response->latitude ?? ''}}</p>
-                    <p>{{$response->longitude ?? ''}}</p>
-                    <p>{{$response->timestamp ?? ''}}</p>
-                    @empty
-                    <p>no data</p>
-                    @endforelse
                 </form>
             </div>
+            <div class="container mt-4">
+                <table class="table table-dark"> 
+                    <thead>
+                        <tr>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Latitude</th>
+                            <th class="text-center">Longitude</th>
+                            <th class="text-center">Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        @forelse($responses as $response)
+                            <td class="text-center">{{$response->name ?? ''}}</td>
+                            <td class="text-center">{{$response->latitude ?? ''}}</td>
+                            <td class="text-center">{{$response->longitude ?? ''}}</td>
+                            <td class="text-center">{{gmdate("Y/m/d h:ia"), $response->timestamp ?? ''}}</td>
+                        </tr>
+                        @empty
+                    </tbody>
+                <p>no data</p>
+                @endforelse
+                </table>
+            </div>
+                <!-- @forelse($time_nix as $time)
+                {{Carbon\Carbon::createFromTimestamp($time)->format('Y/m/d h:ia')}}
+                @empty 
+                @endforelse -->
+            </div>
             <div class="container">
-                @include('map')
+                <!-- @include('map') -->
             </div>
         </main>
     </div>
