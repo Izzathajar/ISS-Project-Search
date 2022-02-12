@@ -16,31 +16,26 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
-        $time = $request->time; // '00:00'
-        $date = $request->date; // '2022-01-22'
+        $time = $request->time; 
+        $date = $request->date; 
         
-        // add date and time
         $timedate = Carbon::createFromFormat('Y-m-d H:i', $date.' '.$time)->timestamp;
         
-        // $hour_before = $timedate->subHour();
-        $hour_before = $timedate - 3600;
-
-        Log::info($hour_before);
+        $hour_before = $timedate - 3600; 
 
         $time_nix = [];
         
-        for ($x = 0; $x <= 11; $x++) {
-            $hour_before += 600;
+        for ($x = 0; $x <= 12; $x++) {
             array_push($time_nix, $hour_before);
+            $hour_before += 600;
         }
         
         $time_unix = implode(',', $time_nix);
         
         $data = Http::get('https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps='.$time_unix.'&units=miles');
         $responses = $data->object();
-        //dd($responses);
-        $all_location = [];
-
+        
+        $combine = [];
         $coordinate = [];
 
         foreach($responses as $response){
@@ -48,10 +43,18 @@ class HomeController extends Controller
             $latitude = $response->latitude;
             $data2 = Http::get('https://api.wheretheiss.at/v1/coordinates/'.$latitude.','.$longitude);
             array_push($coordinate, $data2->object());    
+            //array_push($combine, $data->object(),$data2->object());
         }
-         
-        return view('result',compact('responses','time_nix'));
         
+        // $combine = array_merge($responses, $coordinate);
+        log::info(gettype($latitude));
+        //dd($combine);
 
-    }   
+
+        return view('result',compact('responses','time_nix','coordinate','latitude','longitude'));
+
+
+        
+    }
+    
 }

@@ -8,105 +8,60 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
 <style>
 body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+#map { position: relative; height:700px ; border-radius: 0px; width: 100%; padding-top: 100px; border: 1px solid black; }
 </style>
 </head>
 <body>
-<div id="map"></div>
-
+    <div class="container p-5">
+        <div id="map"></div>
+    </div>
 <script>
 	mapboxgl.accessToken = 'pk.eyJ1IjoiaXp6YXRoYWphciIsImEiOiJja3ppa2l1NWM0Y3J2MnZwaGZpeWdmZWxuIn0.bFgN9Dg77Y-NDN8Kh7bL5Q';
     const map = new mapboxgl.Map({
         container: 'map',
+
         style: 'mapbox://styles/mapbox/light-v9',
-        center: [-77.04, 38.907],
-        zoom: 11.15
+        center: [20, 20],
+        zoom: 0
     });
+
+    const coordinates = @json($coordinate);
+    console.log(coordinates)
+    // const latitude = @json($latitude);
+    // const longitude = 
+
+    // console.log(latitude);
 
     // This GeoJSON contains features that include an "icon"
     // property. The value of the "icon" property corresponds
     // to an image in the Mapbox Light style's sprite.
+
+    const data = [];
+
+    for (let i = 0; i < coordinates.length; i++) {
+        
+        console.log(coordinates[i])
+        var latitude = coordinates[i]['latitude'];
+        var longitude = coordinates[i]['longitude'];
+        var timezone_id = coordinates[i]['timezone_id'];
+
+        data[i] = {
+                'type': 'Feature',
+                'properties': {
+                    'description': timezone_id,
+                    'icon': 'theatre-15'
+                },
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [latitude, longitude]
+                }
+            };
+    }
+    console.log(data)
+
     const places = {
         'type': 'FeatureCollection',
-        'features': [
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': "Ford's Theater",
-                    'icon': 'theatre-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-77.038659, 38.931567]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'The Gaslight',
-                    'icon': 'theatre-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-77.003168, 38.894651]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': "Horrible Harry's",
-                    'icon': 'bar-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-77.090372, 38.881189]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'Bike Party',
-                    'icon': 'bicycle-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-77.052477, 38.943951]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'Rockabilly Rockstars',
-                    'icon': 'music-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-77.031706, 38.914581]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'District Drum Tribe',
-                    'icon': 'music-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-77.020945, 38.878241]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'Motown Memories',
-                    'icon': 'music-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-77.007481, 38.876516]
-                }
-            }
-        ]
+        'features': data
     };
 
     map.on('load', () => {

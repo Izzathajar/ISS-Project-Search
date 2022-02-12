@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -78,7 +78,7 @@
 
         <main class="py-4">
             <!-- @yield('content') -->
-            <div class="container mb-4">
+            <div class="container mb-5 mt-5">
                 <form action="{{ route('search') }}" method="post">
                     @csrf
                     <div class="row justify-content-center">
@@ -106,29 +106,43 @@
                             <th class="text-center">Latitude</th>
                             <th class="text-center">Longitude</th>
                             <th class="text-center">Timestamp</th>
+                            <th class="text-center">Country Code</th>
                         </tr>
                     </thead>
                     <tbody>
+                    @forelse($responses as $response)
                         <tr>
-                        @forelse($responses as $response)
                             <td class="text-center">{{$response->name ?? ''}}</td>
                             <td class="text-center">{{$response->latitude ?? ''}}</td>
                             <td class="text-center">{{$response->longitude ?? ''}}</td>
-                            <td class="text-center">{{gmdate("Y/m/d h:ia"), $response->timestamp ?? ''}}</td>
+                            <td class="text-center">{{gmdate("Y/m/d h:ia", $response->timestamp) ?? ''}}</td>
+                            <td class="text-center">{{$response->name ?? ''}}</td>
+                            <!-- @forelse($coordinate as $location)
+                        <td class="text-center">{{$location->country_code ?? ''}}</td>
+                    @empty
+                        <p>no data</p>
+                     @endforelse -->
+                            @empty
+                            <p>no data</p>
+                        @endforelse
+                    
                         </tr>
-                        @empty
                     </tbody>
-                <p>no data</p>
-                @endforelse
                 </table>
+                @include('map')
             </div>
+            <!-- @forelse($coordinate as $location)
+                            <td class="text-center">{{$location->country_code ?? ''}}</td>
+                        @empty
+                            <p>no data</p>
+                        @endforelse -->
                 <!-- @forelse($time_nix as $time)
                 {{Carbon\Carbon::createFromTimestamp($time)->format('Y/m/d h:ia')}}
                 @empty 
                 @endforelse -->
             </div>
             <div class="container">
-                <!-- @include('map') -->
+
             </div>
         </main>
     </div>
