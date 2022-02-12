@@ -107,6 +107,8 @@
                             <th class="text-center">Longitude</th>
                             <th class="text-center">Timestamp</th>
                             <th class="text-center">Country Code</th>
+                            <th class="text-center">Weather</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -114,32 +116,21 @@
                         <tr>
                             <td class="text-center">{{$response->name ?? ''}}</td>
                             <td class="text-center">{{$response->latitude ?? ''}}</td>
-                            <td class="text-center">{{$response->longitude ?? ''}}</td>
+                            <td class="text-center">{{$response->longitude != '' ? $response->longitude : 'No Data'}}</td>
                             <td class="text-center">{{gmdate("Y/m/d h:ia", $response->timestamp) ?? ''}}</td>
-                            <td class="text-center">{{$response->name ?? ''}}</td>
-                            <!-- @forelse($coordinate as $location)
-                        <td class="text-center">{{$location->country_code ?? ''}}</td>
-                    @empty
-                        <p>no data</p>
-                     @endforelse -->
+                            <!-- <td class="text-center">{{$response->country_code != '??' ? $response->country_code : 'No Data'}}</td> -->
+                            <td class="text-center">{{$response->country_code != '??' ? $response->country_code : 'No Data'}}</td>
+                            <td class="text-center">{{$response->weather->main != '' ? $response->weather->main : 'No Data'}}
+                            <img src="{{$response->icon}}"  alt="Italian Trulli">
+                            </td>
                             @empty
                             <p>no data</p>
                         @endforelse
-                    
                         </tr>
                     </tbody>
                 </table>
                 @include('map')
             </div>
-            <!-- @forelse($coordinate as $location)
-                            <td class="text-center">{{$location->country_code ?? ''}}</td>
-                        @empty
-                            <p>no data</p>
-                        @endforelse -->
-                <!-- @forelse($time_nix as $time)
-                {{Carbon\Carbon::createFromTimestamp($time)->format('Y/m/d h:ia')}}
-                @empty 
-                @endforelse -->
             </div>
             <div class="container">
 

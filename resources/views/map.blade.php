@@ -25,8 +25,8 @@ body { margin: 0; padding: 0; }
         zoom: 0
     });
 
-    const coordinates = @json($coordinate);
-    console.log(coordinates)
+     const coordinates = @json($coordinates);
+    // console.log(coordinates)
     // const latitude = @json($latitude);
     // const longitude = 
 
