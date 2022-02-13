@@ -1,6 +1,6 @@
 ## About ISS Project
 
-This is a project to get information about ISS (International Space Center). 
+This is a Laravel web application to get information about ISS (International Space Center). 
 
 Example of information that we can get from this project are:
 -Longitude
