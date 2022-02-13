@@ -8,13 +8,13 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
 <style>
 body { margin: 0; padding: 0; }
-#map { position: relative; height:700px ; border-radius: 0px; width: 100%; padding-top: 100px; border: 1px solid black; }
+#map { position: relative; height:793px ; width: 100%; padding-top: 0px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; }
 </style>
 </head>
 <body>
-    <div class="container p-5">
+    
         <div id="map"></div>
-    </div>
+    
 <script>
 	mapboxgl.accessToken = 'pk.eyJ1IjoiaXp6YXRoYWphciIsImEiOiJja3ppa2l1NWM0Y3J2MnZwaGZpeWdmZWxuIn0.bFgN9Dg77Y-NDN8Kh7bL5Q';
     const map = new mapboxgl.Map({
@@ -84,7 +84,7 @@ body { margin: 0; padding: 0; }
             }
         });
 
-        map.rotateTo(180, { duration: 10000 });
+        map.rotateTo(0, { duration: 10000 });
     });
 </script>
 

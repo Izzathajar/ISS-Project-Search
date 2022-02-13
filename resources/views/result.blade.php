@@ -15,9 +15,41 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Open Sans", sans-serif;
+            color: #444444;
+            
+        }
+        .table-sm{
+            font-size: 10px;
+        }
+        .test{
+            width: 50%;
+            float: left;
+            padding: 0px;
+        }
+        table{
+            border-radius: 20px;
+        }
+        footer{
+            position: relative;
+            bottom: 0px;
+            width: 100%;
+            margin-top: -100px;
+        }
+        .test2{
+            width: 50%;
+            float: left;
+            padding: 0px;
+            border: 1px solid red;
+        }
+    </style>
 
 </head>
 <body>
@@ -78,7 +110,7 @@
 
         <main class="py-4">
             <!-- @yield('content') -->
-            <div class="container mb-5 mt-5">
+            <div class="container mb-2 mt-2">
                 <form action="{{ route('search') }}" method="post">
                     @csrf
                     <div class="row justify-content-center">
@@ -91,26 +123,25 @@
                             <input class="form-control form-control-lg" name="time" type="time" placeholder=".form-control-lg">
                         </div>
                     </div>
-                    <div class="row justify-content-center mt-4">
+                    <div class="row justify-content-center mt-2 mb-4">
                         <div class="col-md-1">
-                            <button type="submit" class="btn btn-primary">Search</button>
+                            <button type="submit" class="btn btn-dark btn-sm">Search</button>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="container mt-4">
-                <table class="table table-dark"> 
-                    <thead>
+            <div class="container mt-2">
+                <div class="test">
+                <table class="table table-dark table-hover table-striped table-sm "> 
                         <tr>
-                            <th class="text-center">Name</th>
+                            <th class="text-center">Satellite</th>
                             <th class="text-center">Latitude</th>
                             <th class="text-center">Longitude</th>
                             <th class="text-center">Timestamp</th>
                             <th class="text-center">Country Code</th>
                             <th class="text-center">Weather</th>
-
+                            <th class="text-center">Google Map</th>
                         </tr>
-                    </thead>
                     <tbody>
                     @forelse($responses as $response)
                         <tr>
@@ -118,22 +149,26 @@
                             <td class="text-center">{{$response->latitude ?? ''}}</td>
                             <td class="text-center">{{$response->longitude != '' ? $response->longitude : 'No Data'}}</td>
                             <td class="text-center">{{gmdate("Y/m/d h:ia", $response->timestamp) ?? ''}}</td>
-                            <!-- <td class="text-center">{{$response->country_code != '??' ? $response->country_code : 'No Data'}}</td> -->
                             <td class="text-center">{{$response->country_code != '??' ? $response->country_code : 'No Data'}}</td>
                             <td class="text-center">{{$response->weather->main != '' ? $response->weather->main : 'No Data'}}
                             <img src="{{$response->icon}}"  alt="Italian Trulli">
                             </td>
+                            <!-- <form method="get">
+                                <td><input type="submit" class="btn btn-primary" formaction="{{$response->map}}">Map</td>
+                            </form> -->
+                            <td><a target="__blank" type="button" class = "btn btn-primary btn-sm" href="{{$response->map}}">Map</a></td>
+                            <!-- <td>{{$response->map}}</td> -->
                             @empty
                             <p>no data</p>
                         @endforelse
                         </tr>
                     </tbody>
                 </table>
+                </div>
+                <div class="test">
                 @include('map')
+                </div>
             </div>
-            </div>
-            <div class="container">
-
             </div>
         </main>
     </div>

@@ -50,6 +50,7 @@ class HomeController extends Controller
             $weather_response = $get_weather->object();
             $response->weather= $weather_response->weather[0];
             $response->icon="http://openweathermap.org/img/w/".$response->weather->icon.".png";
+            $response->map = $data3->map_url;
         }
         
 
