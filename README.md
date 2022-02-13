@@ -8,6 +8,11 @@ Example of information that we can get from this project are:
 -Timstap
 -Plotted map
 
+## Extension Implemented
+1.   Extension A
+2.   Extension B
+3.   Extension C
+
 ## How to Setup
 
 Requirement
