@@ -15,13 +15,47 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Open Sans", sans-serif;
+            color: #444444;
+            
+        }
+        .table-sm{
+            font-size: 10px;
+        }
+        .test{
+            width: 50%;
+            float: left;
+            padding: 30px;
+        }
+        table{
+            border-radius: 20px;
+            border-collapse: collapse;
+        }
+        footer{
+            position: relative;
+            bottom: 0px;
+            width: 100%;
+            margin-top: -100px;
+        }
+        .test2{
+            width: 50%;
+            float: left;
+            padding: 30px;
+            border: 1px solid red;
+        }
+    </style>
+
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -77,26 +111,26 @@
 
         <main class="py-4">
             <!-- @yield('content') -->
-            <div class="container">
-                <form action="{{ route('search') }}" method="post">
+            <div class="container mb-2 mt-2">
+            <form action="{{ route('search') }}" method="post">
                     @csrf
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
+                    <div class="row justify-content-center mb-2">
+                        <div class="col-md-6">
                             <input class="form-control form-control-lg" name="date" type="date" placeholder=".form-control-lg">
                         </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
-                            <input class="form-control form-control-lg" name="time" type="time" placeholder=".form-control-lg">
+                        <div class="col-md-6">
+                            <div class="row">
+                            <div class="col-md-10">
+                                <input class="form-control form-control-lg" name="time" type="time" placeholder=".form-control-lg">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-dark mt-1 float-right">Search</button>
+                            </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-1">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </div>
-                    </div>
-                    
                 </form>
+            </div>
             </div>
         </main>
     </div>

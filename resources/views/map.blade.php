@@ -8,7 +8,7 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
 <style>
 body { margin: 0; padding: 0; }
-#map { position: relative; height:793px ; width: 100%; padding-top: 0px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; }
+#map { position: relative; height:793px ; width: 100%; padding-top: 0px; border-radius: 20px; border-bottom-right-radius: 20px; }
 </style>
 </head>
 <body>
@@ -22,7 +22,7 @@ body { margin: 0; padding: 0; }
 
         style: 'mapbox://styles/mapbox/light-v9',
         center: [20, 20],
-        zoom: 0
+        zoom: 1
     });
 
      const coordinates = @json($coordinates);
@@ -84,7 +84,7 @@ body { margin: 0; padding: 0; }
             }
         });
 
-        map.rotateTo(0, { duration: 10000 });
+        map.rotateTo(180, { duration: 10000 });
     });
 </script>
 
