@@ -8,7 +8,7 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
 <style>
 body { margin: 0; padding: 0; }
-#map { position: relative; height:793px ; width: 100%; padding-top: 0px; border-radius: 20px; border-bottom-right-radius: 20px; }
+#map { position: relative; height:793px ; width: 100%; padding-top: 0px; border-radius: 0px; border-bottom-right-radius: 20px; }
 </style>
 </head>
 <body>
