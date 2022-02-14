@@ -53,7 +53,7 @@ body { margin: 0; padding: 0; }
                 },
                 'geometry': {
                     'type': 'Point',
-                    'coordinates': [latitude, longitude]
+                    'coordinates': [longitude, latitude]
                 }
             };
     }
