@@ -35,8 +35,8 @@ class HomeController extends Controller
         $data = Http::get('https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps='.$time_unix.'&units=miles');
         $responses = $data->object();
         
-        $combine = [];
         $coordinates = [];
+        $weather_key = config('services.openweather.key');
 
         foreach($responses as $response){
             $longitude = $response->longitude;
@@ -45,8 +45,7 @@ class HomeController extends Controller
             $data3 = $data2->object();
             $response->country_code = $data3->country_code;
             array_push($coordinates, $data3);
-            $get_weather = Http::get('api.openweathermap.org/data/2.5/weather?lat='.$latitude.'&lon='.$longitude.'&appid=26d72f635d86cee96eeb834a36719411');
-            //$response->weather=$get_weather->
+            $get_weather = Http::get('api.openweathermap.org/data/2.5/weather?lat='.$latitude.'&lon='.$longitude.'&appid='.$weather_key);
             $weather_response = $get_weather->object();
             $response->weather= $weather_response->weather[0];
             $response->icon="http://openweathermap.org/img/w/".$response->weather->icon.".png";

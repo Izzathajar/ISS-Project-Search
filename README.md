@@ -23,8 +23,9 @@ Setup
 2.    change to example-app  folder: cd example-app 
 3.    run composer install 
 4.    Duplicate .env.example file. Rename duplicated file to .env
-5.    run php artisan serve
-6.    open http://127.0.0.1:8000/ in the browser
+5.    Copy OPENWEATHER_KEY=26d72f635d86cee96eeb834a36719411 then paste into the .env file (this key is exposed here for testing purpose)
+6.    run php artisan serve
+7.    open http://127.0.0.1:8000/ in the browser
 
 Setup If Using Docker
 1.    git clone https://github.com/Izzathajar/ISS-Project-Search.git
