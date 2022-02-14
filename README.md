@@ -34,7 +34,8 @@ Setup If Using Docker
 4.    run docker exec -it example-app-php sh to enter into container
 5.    run composer install 
 6.    Duplicate .env.example file. Rename duplicated file to .env 
-7.    open http://127.0.0.1:8000/ in the browser
+7.    Copy OPENWEATHER_KEY=26d72f635d86cee96eeb834a36719411 then paste into the .env file (this key is exposed here for testing purpose)
+8.    open http://127.0.0.1:8000/ in the browser
 
 ## How to Use
 
